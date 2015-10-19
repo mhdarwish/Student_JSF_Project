@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<composite:interface>
+		
+		<composite:attribute name="image" required="true"/>
+		<composite:attribute name="doValidation" default="false"/>
+		<composite:attribute name="styleClass" default="icon"/>
+		<composite:attribute name="actionMethod" method-signature="java.lang.String action()"/>
+	
+	</composite:interface>
+	
+	<composite:implementation>
+		<h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
+			<h:commandLink action="#{cc.attrs.actionMethod}" immediate="#{not cc.attrs.doValidation}">
+				<h:graphicImage url="#{cc.attrs.image}" styleClass="#{cc.attrs.styleClass}"/>
+			</h:commandLink>
+		</h:form>
+	</composite:implementation>
+</h:body>
+</html>

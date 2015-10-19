@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	locale="#{view.locale.language}">
+	<h:head>
+		<meta http-equiv="Content-Type"
+			content="text/html; charset=ISO-8859-1" />
+		<title>Insert title here</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="templates/common.xhtml">
+			<ui:define name="content">
+				<div id="menubar">
+					<ul id="menu">
+						<li class="current"><a href="index.html">Home</a></li>
+						<li><a href="ourwork.html">Our Work</a></li>
+						<li><a href="testimonials.html">Testimonials</a></li>
+						<li><a href="projects.html">Projects</a></li>
+						<li><a href="contact.html">Contact Us</a></li>
+					</ul>
+				</div>
+				<div id="site_content">
+
+					<div class="sidebar_container">
+						<div class="sidebar">
+							<div class="sidebar_item">
+								<h2>New Website</h2>
+								<p>Welcome to our new website. Please have a look around,
+									any feedback is much appreciated.</p>
+							</div>
+							<!--close sidebar_item-->
+						</div>
+						<!--close sidebar-->
+						<div class="sidebar">
+							<div class="sidebar_item">
+								<h2>Latest Update</h2>
+								<h3>March 2013</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Pellentesque cursus tempor enim.</p>
+							</div>
+							<!--close sidebar_item-->
+						</div>
+						<!--close sidebar-->
+
+						<!--close sidebar-->
+						<div class="sidebar">
+							<div class="sidebar_item">
+								<h3>January 2013</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Pellentesque cursus tempor enim.</p>
+							</div>
+							<!--close sidebar_item-->
+						</div>
+						<!--close sidebar-->
+						<div class="sidebar">
+							<div class="sidebar_item">
+								<h2>Contact</h2>
+								<p>Phone: +44 (0)1234 567891</p>
+								<p>
+									Email: <a href="mailto:info@youremail.co.uk">info@youremail.co.uk</a>
+								</p>
+							</div>
+							<!--close sidebar_item-->
+						</div>
+						<!--close sidebar-->
+					</div>
+					<!--close sidebar_container-->
+					<div class="slideshow">
+						<ul class="slideshow">
+							<li class="show"><h:graphicImage library="images"
+									name="home_1.jpg" width="680" height="250"
+									alt="&quot;Enter your caption here&quot;" /></li>
+							<li><img width="680" height="250" src="images/home_2.jpg"
+								alt="&quot;Enter your caption here&quot;" /></li>
+						</ul>
+					</div>
+
+					<div id="content">
+						<div class="content_item">
+							<h1>Student Operations</h1>
+							<h:form>
+							<p>
+								<h:outputText value="#{msgs.registerHeading}"
+									styleClass="prompt" />
+							</p>
+							<h:panelGrid columns="2">
+		
+									#{msgs.namePrompt}
+									<h:inputText id="name" value="#{admin.name}" />
+		
+									#{msgs.passwordPrompt}
+									<h:inputSecret id="password" value="#{admin.password}" size="8" />
+
+							</h:panelGrid>
+							<p>
+								<h:commandButton value="#{msgs.registerButtonText}"
+									action="#{admin.register}"/>
+								<h:commandButton value="#{msgs.cancelButtonText}" action="loginComp" />
+							</p>
+							</h:form>
+						</div>
+						<!--close content_item-->
+					</div>
+					<!--close content-->
+				</div>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>

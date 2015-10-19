@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:traffic="http://java.sun.com/jsf/composite/traffic"
+	locale="#{view.locale}">
+	<h:head>
+		<meta http-equiv="Content-Type"
+			content="text/html; charset=ISO-8859-1" />
+		<title>Insert title here</title>
+		<h:outputScript library="javax.faces" name="jsf.js" />
+		<script type="text/javascript">
+			 function monitor(data) {
+				alert("onevent:monitor");
+				if (data.status == "begin") {
+					loading.style.display = "block";
+				} else if (data.status == "success") {
+					loading.style.display = "none";
+				}
+			};
+
+			var handler = function(data) {
+				alert("inside onerror method");
+				
+				console.log(data);
+				console.log("Error Description: " + data.errorName);
+				console.log("Error Description: " + data.description);
+				console.log("Error Name: " + data.errorName);
+				console.log("Error errorMessage: " + data.errorMessage);
+				console.log("httpError: " + data.httpError);
+				console.log("emptyResponse: " + data.emptyResponse);
+				console.log("maleformed: " + data.maleformed);
+				console.log("serverError: " + data.serverError);
+			};
+			
+			jsf.ajax.addOnError(handler);
+		</script>
+	</h:head>
+	<h:body>
+		<ui:composition template="templates/common.xhtml">
+			<ui:define name="content">
+				<div id="menubar">
+					<ul id="menu">
+						<li class="current"><a href="index.html">Home</a></li>
+						<li><a href="ourwork.html">Our Work</a></li>
+						<li><a href="testimonials.html">Testimonials</a></li>
+						<li><a href="projects.html">Projects</a></li>
+						<li><a href="contact.html">Contact Us</a></li>
+					</ul>
+				</div>
+				<div id="site_content">
+
+					<div class="sidebar_container">
+						<div class="sidebar">
+							<div class="sidebar_item">
+								<h2>New Website</h2>
+								<p>Welcome to our new website. Please have a look around,
+									any feedback is much appreciated.</p>
+							</div>
+							<!--close sidebar_item-->
+						</div>
+						<!--close sidebar-->
+						<div class="sidebar">
+							<div class="sidebar_item">
+								<h2>Latest Update</h2>
+								<h3>March 2013</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Pellentesque cursus tempor enim.</p>
+							</div>
+							<!--close sidebar_item-->
+						</div>
+						<!--close sidebar-->
+
+						<!--close sidebar-->
+						<div class="sidebar">
+							<div class="sidebar_item">
+								<h3>January 2013</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Pellentesque cursus tempor enim.</p>
+							</div>
+							<!--close sidebar_item-->
+						</div>
+						<!--close sidebar-->
+						<div class="sidebar">
+							<div class="sidebar_item">
+								<h2>Contact</h2>
+								<p>Phone: +44 (0)1234 567891</p>
+								<p>
+									Email: <a href="mailto:info@youremail.co.uk">info@youremail.co.uk</a>
+								</p>
+							</div>
+							<!--close sidebar_item-->
+						</div>
+						<!--close sidebar-->
+					</div>
+					<!--close sidebar_container-->
+					<div class="slideshow">
+						<ul class="slideshow">
+							<li class="show"><h:graphicImage library="images"
+									name="home_1.jpg" width="680" height="250"
+									alt="&quot;Enter your caption here&quot;" /></li>
+							<li><img width="680" height="250" src="images/home_2.jpg"
+								alt="&quot;Enter your caption here&quot;" /></li>
+						</ul>
+					</div>
+
+					<div id="content">
+						<div class="content_item">
+
+
+							<traffic:icon image="#{resource['images:back.png']}"
+								actionMethod="#{studentBean.logout}"
+								styleClass="imageStyleClass" />
+
+							<h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
+								<h1>#{msgs.txtStudentOperations}</h1>
+
+								<h:commandLink value="Update Date">
+									<f:ajax render="txtDate" />
+								</h:commandLink>
+								<br />
+								<h:outputText id="txtDate" value="#{studentBean.time}"
+									style="color:white" />
+								<h:panelGrid columns="3" cellpadding="2">
+									<h:commandLink action="#{localeChanger.englishAction}">
+										<h:graphicImage library="images" name="en_flag.jpg"
+											alt="English" />
+									</h:commandLink>
+
+									<h:commandLink action="#{localeChanger.arabicAction}">
+										<h:graphicImage library="images" name="jo_flag.jpg"
+											alt="Arabic" />
+									</h:commandLink>
+								</h:panelGrid>
+								<br />
+								<h:commandLink value="#{msgs.btnAddStudent}"
+									action="insert?faces-redirect=true">
+								</h:commandLink>
+								<h:messages style="color:green" />
+								<div style="height: 200px; overflow: auto;">
+
+									<h:dataTable id="dtId" value="#{studentBean.studentList}"
+										var="student" styleClass="employeeTable"
+										headerClass="employeeTableHeader"
+										rowClasses="employeeTableOddRow,employeeTableEvenRow"
+										border="2" cellpadding="10" cellspacing="1" width="650"
+										captionStyle="color:red;font-size:20px">
+										<f:facet name="caption">#{msgs.txtCaption}</f:facet>
+										<h:column>
+											<f:facet name="header">#{msgs.hdId}</f:facet>
+											<h:inputText id="testId" value="#{student.id}" size="1"
+												rendered="#{student.canEdit}" disabled="true" />
+											<h:outputText value="#{student.id}"
+												rendered="#{not student.canEdit}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">#{msgs.hdFName}</f:facet>
+											<h:inputText id="firstNameId" value="#{student.first_name}"
+												size="5" rendered="#{student.canEdit}" />
+											<h:outputText value="#{student.first_name}"
+												rendered="#{not student.canEdit}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">#{msgs.hdLName}</f:facet>
+											<h:inputText value="#{student.last_name}" size="5"
+												rendered="#{student.canEdit}" />
+											<h:outputText value="#{student.last_name}"
+												rendered="#{not student.canEdit}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">#{msgs.hdAge}</f:facet>
+											<h:inputText value="#{student.age}" size="1"
+												rendered="#{student.canEdit}" />
+											<h:outputText value="#{student.age}"
+												rendered="#{not student.canEdit}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">#{msgs.hdMark}</f:facet>
+											<h:inputText value="#{student.mark}" size="1"
+												rendered="#{student.canEdit}" />
+											<h:outputText value="#{student.mark}"
+												rendered="#{not student.canEdit}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">#{msgs.hdGender}</f:facet>
+											<h:inputText value="#{student.gender}" size="1"
+												rendered="#{student.canEdit}" />
+											<h:outputText value="#{student.gender}"
+												rendered="#{not student.canEdit}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">#{msgs.hdStudentCourses}</f:facet>
+											<h:outputText value="" rendered="#{not student.canEdit}" />
+											<h:selectManyCheckbox id="crsListId"
+												value="#{studentBean.selectedItems}"
+												rendered="#{student.canEdit}">
+												<f:selectItems value="#{studentBean.courseList}"
+													var="course" itemLabel="#{course.name}"
+													itemValue="#{course.id}" />
+											</h:selectManyCheckbox>
+											<h:commandButton value="#{msgs.hdSave}"
+												action="#{studentBean.saveStudent}"
+												rendered="#{student.canEdit}">
+												<f:setPropertyActionListener target="#{studentBean.id}"
+													value="#{student.id}" />
+
+											</h:commandButton>
+
+										</h:column>
+										<h:column>
+											<f:facet name="header">#{msgs.hdActions}</f:facet>
+											<table border="1">
+												<tr>
+
+													<td><h:commandLink value="#{msgs.lnkUpdate}"
+															action="#{studentBean.updateStudent}" rendered="false">
+															<f:setPropertyActionListener
+																target="#{studentBean.student}" value="#{student}" />
+														</h:commandLink> <h:commandLink value="#{msgs.lnkUpdate}"
+															action="#{updateBean.navigateToUpdate}" rendered="true">
+															<f:setPropertyActionListener target="#{updateBean.id}"
+																value="#{student.id}" />
+														</h:commandLink></td>
+													<td><h:commandLink id="cmdDelete"
+															value="#{msgs.lnkDelete}" action="#{studentBean.delete}">
+															<f:setPropertyActionListener value="#{student.id}"
+																target="#{studentBean.id}" />
+															
+																<f:ajax execute="cmdDelete" render="dtId"/>
+																															
+														</h:commandLink></td>
+												</tr>
+											</table>
+										</h:column>
+									</h:dataTable>
+									<br />
+								</div>
+							</h:form>
+
+						</div>
+						<!--close content_item-->
+					</div>
+					<!--close content-->
+				</div>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
