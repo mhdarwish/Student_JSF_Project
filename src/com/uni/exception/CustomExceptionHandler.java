@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
-import javax.faces.application.NavigationHandler;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerWrapper;
 import javax.faces.context.FacesContext;

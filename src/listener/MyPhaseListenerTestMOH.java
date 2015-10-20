@@ -5,7 +5,6 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
-import com.uni.locale.LocaleChanger;
 import com.uni.locale.MyLocaleChanger2;
 
 public class MyPhaseListenerTestMOH implements PhaseListener {

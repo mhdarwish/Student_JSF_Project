@@ -1,7 +1,5 @@
 package listener;
 
-import java.util.Locale;
-
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
@@ -10,6 +8,8 @@ import javax.faces.event.PhaseListener;
 import com.uni.locale.LocaleChanger;
 
 public class MyPhaseListener implements PhaseListener {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private static final String LOCALE_BEAN_NAME = "localeChanger";
 	
